@@ -1,0 +1,81 @@
+<mat-toolbar>
+  <button mat-icon mat-icon-button="toggle" class="btn-toggle-info" (click)="sidenav.toggle()">
+  <mat-icon>menu</mat-icon>
+</button>
+Capstone - Insurance Policy
+<div *ngFor="let i of empData" class="box1">
+    {{i.empCompany | uppercase}}
+</div>
+<button class="btn btn-success button2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="logout()">logout</button>
+ </mat-toolbar>
+ <mat-sidenav-container> 
+   <mat-sidenav #sidenav="matSidenav" >
+     
+    <div *ngFor="let i of empData" >
+      <img class="avatar mat-elevation-z8" src="{{i.empImg}}" />
+     
+        <h4 class="name">{{i.empName | uppercase}}</h4>
+      </div>
+      <mat-divider></mat-divider>
+
+
+      <button mat-button  class="menu-button">
+          <mat-icon>person</mat-icon>
+          <a routerLink="/profile"> Profile </a>
+      </button>
+      
+       <button mat-button  class="menu-button">
+         <mat-icon>library_add</mat-icon>
+         <a routerLink="/recommended"> Recommended</a>
+       </button>
+
+       <button mat-button  class="menu-button">
+        <mat-icon>ac_unit</mat-icon>
+        <a routerLink="/all-policy"> All Policy </a>
+      </button>
+
+      <button mat-button  class="menu-button">
+          <mat-icon>shopping_cart</mat-icon>
+          <a routerLink="/cart"> Purchased</a>
+      </button>
+
+       <mat-divider></mat-divider>
+       <button mat-button  class="menu-button">
+          <mat-icon>info</mat-icon>
+          <a routerLink="/about"> About</a>
+        </button>
+
+       <button mat-button  class="menu-button">
+         <mat-icon>help</mat-icon>
+         <a routerLink="/help">  Contact Us</a>
+       </button>
+
+       
+       
+ 
+ 
+   </mat-sidenav>
+   
+
+  <mat-sidenav-content>
+
+<div class="container">
+	<div class="map">
+   	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.4093529132347!2d77.09131051507956!3d28.497329282471362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19372fffffff%3A0x68d9cb0863d75df1!2sMercer!5e0!3m2!1sen!2sin!4v1653305465027!5m2!1sen!2sin" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+	<div class="contact-form">
+		<h1 class="title">Contact Us</h1>
+		<h2 class="subtitle">We are here assist you.</h2>
+		<form [formGroup]="contactUsForm">
+			<input type="text" class="form-control" placeholder=" Name"  formControlName="name" />
+			<input type="text" class="form-control" placeholder=" E-mail " formControlName="email" />
+			<input type="text" class="form-control" placeholder=" Phone Number" formControlName="mobile"/>
+			<textarea class="form-control" rows="8" placeholder="Your Message" formControlName="message"></textarea>
+			<button (click)="sendData()" type="submit" class="btn btn-success ml-5" [disabled]="!contactUsForm.valid">Send Message</button>
+		</form>
+	</div>
+</div>
+
+  </mat-sidenav-content>
+  </mat-sidenav-container>
+

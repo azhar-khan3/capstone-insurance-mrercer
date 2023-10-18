@@ -1,0 +1,148 @@
+<ngx-ui-loader *ngIf="loader"></ngx-ui-loader>
+<div ngxUiLoaderBlurred (blur)="10">
+    <app-header></app-header>
+
+<section id="bg-image" class="vh-100 gradient-custom">
+    <div class="container py-1 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-9">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h1 class="register1">Register Employee</h1>
+                        <!-- <form (ngSubmit)="register(form)" [formGroup]="form">  -->
+                        <form [formGroup]="employeeDetails" enctype="multipart/form-data">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="text" formControlName="empName"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label">Employee Name</label>
+                                    </div>
+
+                                    <div *ngIf="employeeDetails.get('empName')?.invalid && (employeeDetails.get('empName')?.dirty || employeeDetails.get('empName')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empName')?.errors?.['required']">
+                                            * Employee Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="text" formControlName="empId"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label">Employee ID</label>
+                                    </div>
+                                    <div *ngIf="employeeDetails.get('empId')?.invalid && (employeeDetails.get('empId')?.dirty || employeeDetails.get('empId')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empId')?.errors?.['required']">
+                                            * Employee ID is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="number" formControlName="empMobile"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label">Employee Mobile</label>
+                                    </div>
+                                    <div *ngIf="employeeDetails.get('empMobile')?.invalid && (employeeDetails.get('empMobile')?.dirty || employeeDetails.get('empMobile')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empMobile')?.errors?.['required']">
+                                            * Employee Mobile Number is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="text" formControlName="empEmail"
+                                            class="form-control form-control-lg" (keyup)="getPswd($any($event.target).value)" />
+                                        <label class="form-label">Employee Email</label>
+                                    </div>
+                                    <div *ngIf="employeeDetails.get('empEmail')?.invalid && (employeeDetails.get('empEmail')?.dirty || employeeDetails.get('empEmail')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empEmail')?.errors?.['required']">
+                                            * Official Email is required.
+                                        </div>
+                                        <div *ngIf="employeeDetails.get('empEmail')?.errors?.['pattern']">
+
+                                            * Please Enter Valid Email
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="number" formControlName="empAge"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label">Employee Age</label>
+                                    </div>
+                                    <div *ngIf="employeeDetails.get('empAge')?.invalid && (employeeDetails.get('empAge')?.dirty || employeeDetails.get('empAge')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empAge')?.errors?.['required']">
+                                            * Employee Age is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="number" formControlName="empSalary"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label">Employee Salary</label>
+                                    </div>
+                                    <div *ngIf="employeeDetails.get('empSalary')?.invalid && (employeeDetails.get('empSalary')?.dirty || employeeDetails.get('empSalary')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empSalary')?.errors?.['required']">
+                                            * Employee Salary is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="text" formControlName="empAddress"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label">Employee Address</label>
+                                    </div>
+                                    <div *ngIf="employeeDetails.get('empAddress')?.invalid && (employeeDetails.get('empAddress')?.dirty || employeeDetails.get('empAddress')?.touched)"
+                                        class="text-danger">
+                                        <div *ngIf="employeeDetails.get('empAddress')?.errors?.['required']">
+                                            * Employee Address is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                                    <div class="form-outline">
+                                        <input type="file" formControlName="empImg"
+                                            class="form-control form-control-lg" (change)="onChange($event)" />
+                                        <label class="form-label">upload image</label>
+                                    </div>
+                                </div>
+                    
+                            </div>
+
+                            <div class="text-center text-lg-start ">
+                                <button type="button" (click)="postEmployee()" class="btn btn-primary btn-lg"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem; margin-left: 350px;"
+                                    type="submit" [disabled]="!employeeDetails.valid">Register Employee</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<app-footer></app-footer>
+</div>

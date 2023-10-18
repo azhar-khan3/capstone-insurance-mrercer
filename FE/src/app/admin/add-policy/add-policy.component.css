@@ -1,0 +1,34 @@
+#bg-image{
+    background-image: url('../../../assets/empR.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.card{
+  margin-top: -100px;
+}
+
+.register{
+  font-size: 40px;
+}
+
+.register1{
+  font-size: 30px;
+  text-align: center;
+}
+
+p{
+  padding: 10px;
+  font-size: 20px;
+}
+
+#color{
+  color: white;
+  font-size: 32px;
+}
+
+#nav1 {
+    background: #004a9f;
+    color: white;
+    font-size: 30px;
+}

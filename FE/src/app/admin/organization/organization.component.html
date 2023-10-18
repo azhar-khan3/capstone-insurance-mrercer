@@ -1,0 +1,160 @@
+<app-header></app-header>
+
+<br>
+<div class="container" id="box5">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-12">
+            <div class="panel">
+
+                <h1 class="title1">All Organizations
+                    <button class="btn btn-outline-warning btn-lg button2"  data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" (click)="clickAddOrganization()">Add Organization</button>
+                </h1>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">NAME</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contact No.</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Employees</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of orgData  | paginate
+                            : {
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count
+                              };
+                        let i = index">
+                                <td scope="row">{{item.name | uppercase}}</td>
+                                <td scope="row">{{item.location | uppercase}}</td>
+                                <td scope="row">{{item.email | lowercase}}</td>
+                                <td scope="row">{{item.mobile | uppercase}}</td>
+                                <td scope="row"> 
+                                    <button type="button" class="btn"> <i class="fa fa-trash fa-2x"
+                                            (click)="deleteOrganization(item._id)"></i>
+                                        </button>
+                                    </td>
+                                <td>
+                                    <button type="button" class="btn" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"> <i class="fa fa-edit fa-2x"
+                                            (click)="getOrganizationDetailById(item)"
+                                            data-bs-target="#exampleModal"></i>
+                                        </button>
+                                </td>
+                                <td><button type="button" class="btn"><i class="fa fa-users fa-2x" (click)="getIdByOrganization(item._id)" routerLink="/showEmployee"></i> </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next"
+                            (pageChange)="onTableDataChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            
+           <h2 class="modal-title" *ngIf="showAdd" id="exampleModalLabel">Add Organization</h2>
+           <h2 class="modal-title"  *ngIf="showUpdate" id="exampleModalLabel">Update Organization</h2>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="orgFormData">
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="name" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label" >Organization Name</label>
+                        </div>
+
+                        <div *ngIf="orgFormData.get('name')?.invalid && (orgFormData.get('name')?.dirty || orgFormData.get('name')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="orgFormData.get('name')?.errors?.['required']">
+                          * Organization Name is required.
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="email"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Organization Email</label>
+                        </div>
+                        <div *ngIf="orgFormData.get('email')?.invalid && (orgFormData.get('email')?.dirty || orgFormData.get('email')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="orgFormData.get('email')?.errors?.['required']">
+                          * Email ID is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="number" formControlName="mobile"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Organization Mobile</label>
+                        </div>
+                        <div *ngIf="orgFormData.get('mobile')?.invalid && (orgFormData.get('mobile')?.dirty || orgFormData.get('mobile')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="orgFormData.get('mobile')?.errors?.['required']">
+                          * Organization Mobile Number is required.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="location" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Location</label>
+                        </div>
+                        <div *ngIf="orgFormData.get('location')?.invalid && (orgFormData.get('location')?.dirty || orgFormData.get('location')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="orgFormData.get('location')?.errors?.['required']">
+                          * Official Location is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+                    <div  class="text-center text-lg-start ">
+    
+               <button type="button" class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button> &nbsp;&nbsp;&nbsp;
+                           
+                        <button type="submit" *ngIf="showAdd"   (click)="postOrganization()" class="btn btn-primary" [disabled]="!orgFormData.valid">Submit</button>
+
+                        <button type="submit" *ngIf="showUpdate" (click)="updateOrganization()" class="btn btn-primary">Update</button>
+                        
+                    </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

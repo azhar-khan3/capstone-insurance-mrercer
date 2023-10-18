@@ -1,0 +1,202 @@
+
+<app-header></app-header>
+<br>
+<div class="container" id="box5">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-12">
+            <div class="panel">
+             
+                            <h1 class="title1">All Policies
+                                <button class="btn btn-outline-warning btn-lg button2" 
+                                routerLink="/addPolicy">Add policy</button>
+                            </h1>
+                     
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Policy Name</th>
+                                <th>Dependants</th>
+                                <th>Duration</th>
+                                <th>Age</th>
+                                <th>PREMIUM</th>
+                                <th>Claim Amount</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of policyData  | paginate
+                            : {
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count
+                              };
+                        let i = index">
+                                <td>{{item.PolicyName | uppercase}}</td>
+                                <td>{{item.Dependants}}</td>
+                                <td>{{item.Duration}}</td>
+                                <td>{{item.Age}}</td>
+                                <td>{{item.Premium}}</td>
+                                <td>{{item.ClaimAmount}}</td>
+                                <td>{{item.Description}}</td>
+                                <td>
+                                    <button type="button" class="btn" > <i class="fa fa-trash fa-2x" (click)="delete(item._id)"></i></button>
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fa fa-edit fa-2x" (click)="getPolicyDetailById(item)"  data-bs-target="#exampleModal"></i></button>
+                                </td>
+                                
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                      <pagination-controls
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        (pageChange)="onTableDataChange($event)"
+                      >
+                      </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>
+
+  <!-- Modal -->
+  <div *ngIf="isOpen">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Update Policy Details</h2>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="policyDetails">
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="PolicyName"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Policy Name</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('PolicyName')?.invalid && (policyDetails.get('PolicyName')?.dirty || policyDetails.get('PolicyName')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('PolicyName')?.errors?.['required']">
+                          * Policy Name is required.
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="Age"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Age</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('Age')?.invalid && (policyDetails.get('Age')?.dirty || policyDetails.get('Age')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('Age')?.errors?.['required']">
+                          * Age is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                   
+                
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="Dependants"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Dependants</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('Dependants')?.invalid && (policyDetails.get('Dependants')?.dirty || policyDetails.get('Dependants')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('Dependants')?.errors?.['required']">
+                          * Dependants is required.
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="Duration"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Duration</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('Duration')?.invalid && (policyDetails.get('Duration')?.dirty || policyDetails.get('Duration')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('Duration')?.errors?.['required']">
+                          * Duration is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="Premium" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Premium</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('Premium')?.invalid && (policyDetails.get('Premium')?.dirty || policyDetails.get('Premium')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('Premium')?.errors?.['required']">
+                          * Premium is required.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="ClaimAmount"
+                                class="form-control form-control-lg" />
+                            <label class="form-label" >Claim Amount</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('ClaimAmount')?.invalid && (policyDetails.get('ClaimAmount')?.dirty || policyDetails.get('ClaimAmount')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('ClaimAmount')?.errors?.['required']">
+                          * Claim Amount is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="Description" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Description</label>
+                        </div>
+                        <div *ngIf="policyDetails.get('Description')?.invalid && (policyDetails.get('Description')?.dirty || policyDetails.get('Description')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="policyDetails.get('Description')?.errors?.['required']">
+                          * Description is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="text-center text-lg-start ">
+                    <button type="button"  class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button>
+
+                        &nbsp;&nbsp;&nbsp;
+                    <button type="submit" (click)="updatePolicy()" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

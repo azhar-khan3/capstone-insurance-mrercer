@@ -1,0 +1,215 @@
+<!-- main-header works! -->
+<nav id="nav1" class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class=" heading">
+        <h1 class="fs-1"><b>Capstone Insurance</b></h1>
+      </div>
+    </div>
+    <ul class="navbar-nav mr-5 mb-2 mb-lg-0 pr-5">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" class="fs-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Login
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2">Admin</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Employee</a></li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- <mdb-carousel>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E2.jpg">
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E1.jpg">
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E4.jpg">
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E3.jpg">
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E5.jpg">
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E7.jpg">
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img class="d-block" src="../../../assets/E6.jpg">
+  </mdb-carousel-item>
+</mdb-carousel> -->
+
+<div id="carouselExampleInterval" class="carousel" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="../../../assets/E2.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../../../assets/E1.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../../../assets/E4.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../../../assets/E3.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../../../assets/E5.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../../../assets/E7.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../../../assets/E6.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+<!-- Modal -->
+<div class="form1">
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="padding: 5px 10px 5px 30px; "> 
+          <h2 class="modal-title " id="exampleModalLabel">Employee Login</h2>
+          <button type="button" (click)="cancel()" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="userLogin">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="empEmail" required>
+              <div
+                *ngIf="userLogin.get('empEmail')?.invalid && (userLogin.get('empEmail')?.dirty || userLogin.get('empEmail')?.touched)"
+                class="text-danger">
+
+                <div *ngIf="userLogin.get('empEmail')?.errors?.['required']">
+
+                  * Email is required.
+
+                </div>
+
+                <div *ngIf="userLogin.get('empEmail')?.errors?.['pattern']">
+
+                  * Please Enter Valid Email
+
+                </div>
+
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" formControlName="empPswd" required>
+              <div
+                *ngIf="userLogin.get('empPswd')?.invalid && (userLogin.get('empPswd')?.dirty || userLogin.get('empPswd')?.touched)"
+                class="text-danger">
+
+                <div *ngIf="userLogin.get('empPswd')?.errors?.['required']">
+
+                  * Password is required.
+
+                </div>
+                <div *ngIf="userLogin.get('empPswd')?.errors?.['pattern']">
+
+                  * Please Enter Valid Password
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="cancel()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" (click)="login(userLogin)" class="btn btn-primary" [disabled]="!userLogin.valid">Sign
+            In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="form1">
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModal2" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header "style="padding: 5px 10px 5px 30px; ">
+          <h2 class="modal-title" id="exampleModalLabel">Admin Login</h2>
+          <button type="button" (click)="cancel1()" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="adminLogin">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="email" required>
+              <div
+                *ngIf="adminLogin.get('email')?.invalid && (adminLogin.get('email')?.dirty || adminLogin.get('email')?.touched)"
+                class="text-danger">
+
+                <div *ngIf="adminLogin.get('email')?.errors?.['required']">
+
+                  * Email is required.
+
+                </div>
+
+                <div *ngIf="adminLogin.get('email')?.errors?.['pattern']">
+
+                  * Please Enter Valid Email
+
+                </div>
+
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password"
+                required>
+              <div
+                *ngIf="adminLogin.get('password')?.invalid && (adminLogin.get('password')?.dirty || adminLogin.get('password')?.touched)"
+                class="text-danger">
+
+                <div *ngIf="adminLogin.get('password')?.errors?.['required']">
+
+                  * Password is required.
+
+                </div>
+                <div *ngIf="adminLogin.get('password')?.errors?.['pattern']">
+
+                  * Please Enter Valid Password
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="cancel1()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" (click)="admlogin(adminLogin)" class="btn btn-primary"
+            [disabled]="!adminLogin.valid">Sign In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

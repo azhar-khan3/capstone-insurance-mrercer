@@ -1,0 +1,128 @@
+<mat-toolbar>
+    <button mat-icon mat-icon-button="toggle" class="btn-toggle-info" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  Capstone - Insurance Policy
+  <div *ngFor="let i of empData1" class="box1">
+    {{i.empCompany | uppercase}}
+</div>
+
+<button class="btn btn-success button2" data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="logout()">logout</button>
+   </mat-toolbar>
+   <mat-sidenav-container> 
+     <mat-sidenav #sidenav="matSidenav" >
+       
+      <div *ngFor="let i of empData1" >
+        <img class="avatar mat-elevation-z8" src="{{i.empImg}}" />
+       
+          <h4 class="name">{{i.empName | uppercase}}</h4>
+        </div>
+      
+        <mat-divider></mat-divider>
+
+
+        <button mat-button  class="menu-button">
+            <mat-icon>person</mat-icon>
+            <a routerLink="/profile"> Profile </a>
+        </button>
+        
+         <button mat-button  class="menu-button">
+           <mat-icon>library_add</mat-icon>
+           <a routerLink="/recommended"> Recommended</a>
+         </button>
+
+         <button mat-button  class="menu-button">
+          <mat-icon>ac_unit</mat-icon>
+          <a routerLink="/all-policy"> All Policy </a>
+        </button>
+
+        <button mat-button  class="menu-button">
+            <mat-icon>shopping_cart</mat-icon>
+            <a routerLink="/cart"> Purchased</a>
+        </button>
+
+         <mat-divider></mat-divider>
+         <button mat-button  class="menu-button">
+            <mat-icon>info</mat-icon>
+            <a routerLink="/about"> About</a>
+          </button>
+
+         <button mat-button  class="menu-button">
+           <mat-icon>help</mat-icon>
+           <a routerLink="/help">  Contact Us</a>
+         </button>
+
+         
+         
+   
+   
+     </mat-sidenav>
+     
+
+     <mat-sidenav-content>
+      <!-- <div class="boxTable ">
+        <div class="container  mt-3">
+          <div class="row mt-3">
+              <ng-container>     
+                  <div *ngFor="let item of boughtData" class="card col-md-3 mt-2">
+                      <div class="bodyTable1">{{item.PolicyName | uppercase}}  </div>
+                      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">DURATION : {{item.Duration }}</p>  
+                      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">DEPENDANTS : {{item.Dependants  | uppercase}}</p>
+                      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">AGE : {{item.Age }}</p>
+                      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">PREMIUM : {{item.Premium }}</p>
+                      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">CLAIM AMOUNT : {{item.ClaimAmount}}</p>
+                      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">DESCRIPTION : {{item.Description  | uppercase}}</p>
+                     
+                  </div>
+                  
+              </ng-container>
+              <br />
+              <div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div >
+        <div class="boxTable ">
+          <div class="container  mt-3">
+            <div class="row mt-3">
+              <ng-container>
+                <div *ngFor="let item of boughtData" class="card col-md-3 mt-2">
+                  <div class="bodyTable1">
+                    <p class="text-center"><strong>{{item.PolicyName | uppercase}}</strong></p>
+                    <hr style="width:100%;">
+                  </div>
+                  <br><br>
+                  <div class="bodyDiv">
+  
+                    <label><b> DURATION :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.Duration }}</b></label><br>
+                    <label><b>DEPENDANTS :&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.Dependants}}</b></label><br>
+                    <label><b>AGE
+                        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.Age
+                        }}</b></label><br>
+                    <label><b>PREMIUM
+                        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.Premium
+                        }}</b></label><br>
+                    <label><b>CLAIM AMOUNT :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{item.ClaimAmount}}</b></label><br>
+                  </div>
+                  <!-- <button id="button2" (click)="sendData(item)" type="button" class="btn btn-danger"
+                    style="width: 10rem;">BUY POLICY</button><br> -->
+                </div>
+  
+              </ng-container>
+  
+              <div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+          

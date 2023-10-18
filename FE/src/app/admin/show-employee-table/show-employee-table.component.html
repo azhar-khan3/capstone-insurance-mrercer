@@ -1,0 +1,222 @@
+
+<app-header></app-header>
+<br>
+
+<div class="container" id="box5">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-12">
+            <div class="panel">
+                            <h1 class="title1">All Employees  
+                                <button class="btn btn-outline-warning btn-lg button2"
+        routerLink="/addEmployee">Add Employee</button>
+                            </h1>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">NAME</th>
+                                <th scope="col">Employee ID</th>
+                                <th scope="col">Mobile No.</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">SALARY</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Company</th>
+                                <th scope="col">Email ID</th> 
+                                <th scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of empData  | paginate
+                            : {
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count
+                              };
+                        let i = index">
+                        <td scope="row">{{item.empName | uppercase}}</td>
+                        <td scope="row">{{item.empId }}</td>
+                        <td scope="row">{{item.empMobile}}</td>
+                        <td scope="row">{{item.empAge}}</td>
+                        <td scope="row">{{item.empSalary |currency}}</td>
+                        <td scope="row">{{item.empAddress}}</td>
+                        <td scope="row">{{item.empCompany}}</td>
+                        <td scope="row">{{item.empEmail }}</td>
+                        <td>
+                          
+                        
+                                <button type="button" class="btn" > <i class="fa fa-trash fa-2x" (click)="delete(item._id)"></i></button>
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fa fa-edit fa-2x" (click)="getEmployeeDetailById(item)"  data-bs-target="#exampleModal"></i></button>
+                              
+                        </td>
+                                
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                      <pagination-controls
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        (pageChange)="onTableDataChange($event)"
+                      >
+                      </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Update Employee Details</h2>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="employeeDetails">
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="empName" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label" >Employee Name</label>
+                        </div>
+
+                        <div *ngIf="employeeDetails.get('empName')?.invalid && (employeeDetails.get('empName')?.dirty || employeeDetails.get('empName')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empName')?.errors?.['required']">
+                          * Employee Name is required.
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="empId"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Employee ID</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empId')?.invalid && (employeeDetails.get('empId')?.dirty || employeeDetails.get('empId')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empId')?.errors?.['required']">
+                          * Employee ID is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="number" formControlName="empMobile"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Employee Mobile</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empMobile')?.invalid && (employeeDetails.get('empMobile')?.dirty || employeeDetails.get('empMobile')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empMobile')?.errors?.['required']">
+                          * Employee Mobile Number is required.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="empEmail" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Employee Email</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empEmail')?.invalid && (employeeDetails.get('empEmail')?.dirty || employeeDetails.get('empEmail')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empEmail')?.errors?.['required']">
+                          * Official Email is required.
+                        </div>
+                        <div *ngIf="employeeDetails.get('empEmail')?.errors?.['pattern']">
+
+                            * Please Enter Valid Email
+            
+                         </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="number" formControlName="empAge"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Employee Age</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empAge')?.invalid && (employeeDetails.get('empAge')?.dirty || employeeDetails.get('empAge')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empAge')?.errors?.['required']">
+                          * Employee Age is required.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="number" formControlName="empSalary"
+                                class="form-control form-control-lg" />
+                            <label class="form-label" >Employee Salary</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empSalary')?.invalid && (employeeDetails.get('empSalary')?.dirty || employeeDetails.get('empSalary')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empSalary')?.errors?.['required']">
+                          * Employee Salary is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="empCompany"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Employee Company</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empCompany')?.invalid && (employeeDetails.get('empCompany')?.dirty || employeeDetails.get('empCompany')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empCompany')?.errors?.['required']">
+                          * Employee Company Name is required.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="empAddress" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Employee Address</label>
+                        </div>
+                        <div *ngIf="employeeDetails.get('empAddress')?.invalid && (employeeDetails.get('empAddress')?.dirty || employeeDetails.get('empAddress')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="employeeDetails.get('empAddress')?.errors?.['required']">
+                          * Employee Address is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                    <div  class="text-center text-lg-start ">
+    
+               <button type="button" class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button> &nbsp;&nbsp;&nbsp;
+
+
+                        <button type="submit" (click)="updateEmployee()" class="btn btn-primary">Submit</button>
+                        
+                    </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

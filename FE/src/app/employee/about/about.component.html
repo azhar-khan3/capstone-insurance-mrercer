@@ -1,0 +1,135 @@
+<mat-toolbar>
+  <button mat-icon mat-icon-button="toggle" class="btn-toggle-info" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  Capstone - Insurance Policy
+  <div *ngFor="let i of empData" class="box1">
+    {{i.empCompany | uppercase}}
+  </div>
+
+  <button class="btn btn-success button2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    (click)="logout()">logout</button>
+</mat-toolbar>
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav="matSidenav">
+
+    <div *ngFor="let i of empData" >
+      <img class="avatar mat-elevation-z8" src="{{i.empImg}}" />
+     
+        <h4 class="name">{{i.empName | uppercase}}</h4>
+      </div>
+    
+    <mat-divider></mat-divider>
+
+
+    <button mat-button class="menu-button">
+      <mat-icon>person</mat-icon>
+      <a routerLink="/profile"> Profile </a>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>library_add</mat-icon>
+      <a routerLink="/recommended"> Recommended</a>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>ac_unit</mat-icon>
+      <a routerLink="/all-policy"> All Policy </a>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>shopping_cart</mat-icon>
+      <a routerLink="/cart"> Purchased</a>
+    </button>
+
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button">
+      <mat-icon>info</mat-icon>
+      <a routerLink="/about"> About</a>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>help</mat-icon>
+      <a routerLink="/help"> Contact Us</a>
+    </button>
+
+
+
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="testimonial">
+      <article>
+        <br>
+    <h1 id="about">Capstone Insurance Policy</h1>
+  <div class="mycard">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card" style="width:25rem;">
+          <img src="../../../assets/Dan G.jpg" class="card-img-top" height="400px" alt="...">
+          <div class="card-body">
+            <h4><b>Daniel S. Glaser</b></h4>
+            <p> Daniel S. Glaser ( Dan Glaser) is President and Chief Executive Officer (CEO) of Marsh McLennan (NYSE: MMC), the world's leading professional services firm in the areas of risk, strategy and people.</p>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="card" style="width:25rem;">
+          <img src="../../../assets/CIO.png" class="card-img-top" height="400px" alt="...">
+          <div class="card-body">
+            <h4><b>Paul Beswick </b></h4>
+            <p>Paul Beswick is senior vice president & CIO of Marsh McLennan, oversees more than 4,000 technologists supporting the company's four global businesses — Marsh, Guy Carpenter, Mercer and Oliver Wyman.</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </article>
+    </div>
+
+ 
+    <div class="box-main">
+
+      <!-- <div class="body1"> -->
+      <div class="wrapper">
+        <div class="testimonial">
+          <article>
+            <!-- <h1>About Us</h1> -->
+            <blockquote>
+              <p>
+                Marsh India, part of the Marsh & McLennan (MMC) Group, is a leading insurance brokerage and risk
+                advisory firm that specializes in providing clients with a full spectrum of personalized risk and
+                insurance products and solutions. With MMC’s footprint in over 130 countries, Marsh India benefits from
+                the Group’s global expertise in various areas such as risk consultancy, risk management, insurance
+                broking, and alternative risk financing. The firm constantly endeavors to transform risk from a
+                liability into an advantage. BenefitMe is an initiative by the ‘Employee Health & Benefits’ vertical
+                within Marsh India. BenefitMe helps employers simplify the complex enrolment processes and provide
+                access to critical benefits information that is largely sought by employees. Being one of the fastest
+                developing nations, India has served as a favorable zone for Marsh’s rapid growth. Marsh provides
+                comprehensive local solutions with global expertise, including a wide range of insurance/reinsurance and
+                risk management services to top Indian firms as well as MNCs. Marsh prides itself of being the first
+                international licensed foreign insurance broker in the country. With a talent pool of more than 500
+                employees spread across cities such as Mumbai, Bengaluru, Delhi, Kolkata, Chennai, Pune, Hyderabad,
+                Gurgaon, Ahmedabad, Vadodara, Bhubaneswar, and Dibrugarh.
+              </p>
+            </blockquote><br>
+            <!-- <h1 class="footer1">Capstone Insurance Policy </h1> -->
+          </article>
+        </div>
+      </div>
+      <!-- </div> -->
+
+    </div>
+
+    
+
+
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

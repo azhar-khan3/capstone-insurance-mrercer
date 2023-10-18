@@ -1,0 +1,21 @@
+#color{
+    color: white;
+    font-size: 32px;
+  }
+  
+  #nav1 {
+      background: #004a9f;
+      color: white;
+      font-size: 30px;
+  }
+
+  a{
+      text-decoration: none;
+      color: aliceblue;
+      font-family: serif;
+  }
+  a:hover{
+      color:chartreuse;
+      transform: scale(1.1);
+      box-shadow: 50px 50px 150px ;
+  }

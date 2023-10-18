@@ -1,0 +1,42 @@
+th {
+  font-size: 22px;
+}
+
+td {
+  font-size: 20px;
+}
+
+.title1 {
+  background-color: rgb(13, 94, 244);
+  margin-top: 10px;
+  padding-left: 30px;
+}
+
+p {
+  padding: 10px;
+  font-size: 20px;
+}
+
+
+h1 {
+  color: white;
+  font-size: 35px;
+  padding: 5px;
+  margin: 0px;
+}
+
+#color {
+  color: white;
+  font-size: 32px;
+}
+
+#nav1 {
+  background: #004a9f;
+  color: white;
+  font-size: 30px;
+}
+
+
+.button2 {
+  margin-left: 850px;
+}

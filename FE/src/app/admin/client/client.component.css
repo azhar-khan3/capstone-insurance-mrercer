@@ -1,0 +1,23 @@
+th{
+    font-size: 22px;
+}
+
+td{
+    font-size: 20px;
+}
+.title1{
+  background-color:rgb(13, 94, 244);
+  margin-top: 10px;
+  padding-left: 30px;
+}
+
+h1{
+  color: white;
+  font-size: 35px;
+  padding: 5px;
+  margin: 0px;
+}
+
+.button2 {
+  margin-left: 950px;
+}

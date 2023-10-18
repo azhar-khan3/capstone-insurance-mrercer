@@ -1,0 +1,160 @@
+<app-header></app-header>
+
+
+<div class="container" id="box5">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-12">
+            <div class="panel">
+
+                <h1 class="title1">All Client
+                    <button class="btn btn-outline-warning btn-lg button2"  data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" (click)="clickAddClient()">Add Client</button>
+                </h1>
+
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Client Name</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contact No.</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Policies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of clientData  | paginate
+                            : {
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count
+                              };
+                        let i = index">
+                                <td scope="row">{{item.clientName | uppercase}}</td>
+                                <td scope="row">{{item.location | uppercase}}</td>
+                                <td scope="row">{{item.email | lowercase}}</td>
+                                <td scope="row">{{item.mobile | uppercase}}</td>
+                                <td scope="row"> 
+                                    <button type="button" class="btn"> <i class="fa fa-trash fa-2x"
+                                            (click)="deleteClient(item._id)"></i>
+                                        </button>
+                                    </td>
+                                <td>
+                                    <button type="button" class="btn" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"> <i class="fa fa-edit fa-2x"
+                                            (click)="getClientDetailById(item)"
+                                            data-bs-target="#exampleModal"></i>
+                                        </button>
+                                </td>
+                                <td><button type="button" class="btn"><i class="fa fa-file-text fa-2x" (click)="getIdByClient(item._id)" routerLink="/showPolicy"></i> </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next"
+                            (pageChange)="onTableDataChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title" *ngIf="showAdd" id="exampleModalLabel">Add Client</h2>
+          <h2 class="modal-title" *ngIf="showUpdate" id="exampleModalLabel">Update Client</h2>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="clientFormData">
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="clientName" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label" >Client Name</label>
+                        </div>
+
+                        <div *ngIf="clientFormData.get('clientName')?.invalid && (clientFormData.get('clientName')?.dirty || clientFormData.get('clientName')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="clientFormData.get('clientName')?.errors?.['required']">
+                          * Client Name is required.
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="email"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Client Email</label>
+                        </div>
+                        <div *ngIf="clientFormData.get('email')?.invalid && (clientFormData.get('email')?.dirty || clientFormData.get('email')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="clientFormData.get('email')?.errors?.['required']">
+                          * Email ID is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="number" formControlName="mobile"
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Client Mobile</label>
+                        </div>
+                        <div *ngIf="clientFormData.get('mobile')?.invalid && (clientFormData.get('mobile')?.dirty || clientFormData.get('mobile')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="clientFormData.get('mobile')?.errors?.['required']">
+                          * Client Mobile Number is required.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" formControlName="location" 
+                                class="form-control form-control-lg" />
+                            <label class="form-label">Location</label>
+                        </div>
+                        <div *ngIf="clientFormData.get('location')?.invalid && (clientFormData.get('location')?.dirty || clientFormData.get('location')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="clientFormData.get('location')?.errors?.['required']">
+                          * Official Email is required.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+                    <div  class="text-center text-lg-start ">
+    
+               <button type="button" class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button> &nbsp;&nbsp;&nbsp;
+                           
+                        <button type="submit" *ngIf="showAdd"   (click)="postClient()" class="btn btn-primary" [disabled]="!clientFormData.valid">Submit</button>
+
+                        <button type="submit" *ngIf="showUpdate" (click)="updateClient()" class="btn btn-primary">Update</button>
+                        
+                    </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

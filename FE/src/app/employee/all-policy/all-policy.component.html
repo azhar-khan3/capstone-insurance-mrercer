@@ -1,0 +1,122 @@
+<mat-toolbar>
+    <button mat-icon mat-icon-button="toggle" class="btn-toggle-info" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  Capstone - Insurance Policy
+  <div *ngFor="let i of empData" class="box1">
+    {{i.empCompany | uppercase}}
+</div>
+<button class="btn btn-success button2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="logout()">logout</button>
+   </mat-toolbar>
+   <mat-sidenav-container> 
+     <mat-sidenav #sidenav="matSidenav" >
+       
+      <div *ngFor="let i of empData" >
+        <img class="avatar mat-elevation-z8" src="{{i.empImg}}" />
+       
+          <h4 class="name">{{i.empName | uppercase}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+
+
+        <button mat-button  class="menu-button">
+            <mat-icon>person</mat-icon>
+            <a routerLink="/profile"> Profile </a>
+        </button>
+        
+         <button mat-button  class="menu-button">
+           <mat-icon>library_add</mat-icon>
+           <a routerLink="/recommended"> Recommended</a>
+         </button>
+
+         <button mat-button  class="menu-button">
+          <mat-icon>ac_unit</mat-icon>
+          <a routerLink="/all-policy"> All Policy </a>
+        </button>
+
+        <button mat-button  class="menu-button">
+            <mat-icon>shopping_cart</mat-icon>
+            <a routerLink="/cart"> Purchased</a>
+        </button>
+
+         <mat-divider></mat-divider>
+         <button mat-button  class="menu-button">
+            <mat-icon>info</mat-icon>
+            <a routerLink="/about"> About</a>
+          </button>
+
+         <button mat-button  class="menu-button">
+           <mat-icon>help</mat-icon>
+           <a routerLink="/help">  Contact Us</a>
+         </button>
+     </mat-sidenav>
+     
+
+     <mat-sidenav-content>
+
+
+<br><br>
+    <div class="container" id="box5">
+      <div class="row">
+          <div class="col-md-offset-1 col-md-12">
+              <div class="panel">
+                  <div class="panel-heading">
+                      <div class="row">
+                          <div class="col col-sm-3 col-xs-12">
+                              <h4 class="title">All <span>Policies</span></h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="panel-body table-responsive">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                                  <th>Policy Name</th>
+                                  <th>Dependants</th>
+                                  <th>Duration</th>
+                                  <th>Age</th>
+                                  <th>PREMIUM</th>
+                                  <th>Claim Amount</th>
+                                  <th>Description</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let item of policies  | paginate
+                              : {
+                                  itemsPerPage: tableSize,
+                                  currentPage: page,
+                                  totalItems: count
+                                };
+                          let i = index">
+                                  <td>{{item.PolicyName | uppercase}}</td>
+                                  <td>{{item.Dependants}}</td>
+                                  <td>{{item.Duration}}</td>
+                                  <td>{{item.Age}}</td>
+                                  <td>{{item.Premium}}</td>
+                                  <td>{{item.ClaimAmount}}</td>
+                                  <td>{{item.Description}}</td>
+                                  
+                                  
+                              </tr>
+                             
+                          </tbody>
+                      </table>
+                      <div class="d-flex justify-content-center">
+                        <pagination-controls
+                          previousLabel="Prev"
+                          nextLabel="Next"
+                          (pageChange)="onTableDataChange($event)"
+                        >
+                        </pagination-controls>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+    
+         
