@@ -9,7 +9,7 @@ const getAllEmployees = async (req, res) => {
 }
 
 const getOneEmployee = async (req, res) => {
-  const OneEmployee = await Employee.findById(req.params.id)
+  const OneEmployee = await Employee.findById(req.params.id).populate("policies");
   res.send(OneEmployee)
 }
 
