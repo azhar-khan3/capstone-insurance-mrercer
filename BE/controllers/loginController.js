@@ -9,7 +9,7 @@ exports.loginUser = async (req, res) => {
     try {
         let user = await Employee.findOne({
             empEmail: login.empEmail
-        });
+        }).populate("policies");
         //check if user exit
         if (!user) {
             return res.status(400).json({
